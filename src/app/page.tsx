@@ -135,7 +135,12 @@ const columns = [
 
 export default function Home() {
   const [data, setData] = useState<Team[]>(() => [])
-  const [sorting, setSorting] = useState<SortingState>([])
+  const [sorting, setSorting] = useState<SortingState>([
+    {
+      id: 'division',
+      desc: false,
+    },
+  ])
   const [expandedRows, setExpandedRows] = useState<string[]>([])
 
   const toggleRowExpanded = (rowId: string) => {
