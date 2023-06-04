@@ -152,7 +152,7 @@ export default function Home() {
 
   useEffect(() => {
     const fetchTeamData = async () => {
-      const response = await fetch("/api/leagues");
+      const response = await fetch("/api/nhl");
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
