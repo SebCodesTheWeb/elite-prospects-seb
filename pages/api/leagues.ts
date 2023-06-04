@@ -8,9 +8,10 @@ type Team = {
   GF: number
   GA: number
   postSeason: string
+  division: string
 }
 
-export default function getTeams() {
+export default function getTeams(): Team[] {
   const teams: Team[] = [
     {
       name: 'Boston Bruins',
@@ -22,6 +23,7 @@ export default function getTeams() {
       GF: 305,
       GA: 177,
       postSeason: 'Conference QF loss',
+      division: 'Atlantic',
     },
     {
       name: 'New York Rangers',
@@ -33,6 +35,7 @@ export default function getTeams() {
       GF: 290,
       GA: 180,
       postSeason: 'Conference SF loss',
+      division: 'Metropolitan',
     },
     {
       name: 'Montreal Canadiens',
@@ -44,6 +47,7 @@ export default function getTeams() {
       GF: 275,
       GA: 185,
       postSeason: 'Division Finals loss',
+      division: 'Atlantic',
     },
     {
       name: 'Philadelphia Flyers',
@@ -55,6 +59,7 @@ export default function getTeams() {
       GF: 265,
       GA: 210,
       postSeason: 'Conference SF loss',
+      division: 'Metropolitan',
     },
     {
       name: 'Detroit Red Wings',
@@ -66,6 +71,7 @@ export default function getTeams() {
       GF: 255,
       GA: 220,
       postSeason: 'Conference QF loss',
+      division: 'Central',
     },
     {
       name: 'Chicago Blackhawks',
@@ -77,6 +83,7 @@ export default function getTeams() {
       GF: 245,
       GA: 230,
       postSeason: 'Conference Finals loss',
+      division: 'Central',
     },
     {
       name: 'Pittsburgh Penguins',
@@ -88,6 +95,7 @@ export default function getTeams() {
       GF: 250,
       GA: 235,
       postSeason: 'Stanley Cup Champions',
+      division: 'Metropolitan',
     },
   ]
 

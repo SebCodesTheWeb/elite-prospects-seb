@@ -2,6 +2,7 @@
 import styles from './page.module.css'
 import { useState, useEffect } from 'react';
 import { useReactTable, createColumnHelper, getCoreRowModel, flexRender } from '@tanstack/react-table'
+import { Indie_Flower } from 'next/font/google';
 
 
 type Team = {
@@ -14,87 +15,10 @@ type Team = {
   GF: number;
   GA: number;
   postSeason: string;
+  TP?: number;
+  PGP?: number; 
+  '+/-': number;
 }
-
-const defaultData: Team[] = [
-  {
-    name: 'Boston Bruins',
-    GP: 82,
-    W: 54,
-    L: 12,
-    OTW: 11,
-    OTL: 5,
-    GF: 305,
-    GA: 177,
-    postSeason: 'Conference QF loss'
-  },
-  {
-    name: 'New York Rangers',
-    GP: 82,
-    W: 52,
-    L: 14,
-    OTW: 9,
-    OTL: 7,
-    GF: 290,
-    GA: 180,
-    postSeason: 'Conference SF loss'
-  },
-  {
-    name: 'Montreal Canadiens',
-    GP: 82,
-    W: 50,
-    L: 18,
-    OTW: 8,
-    OTL: 6,
-    GF: 275,
-    GA: 185,
-    postSeason: 'Division Finals loss'
-  },
-  {
-    name: 'Philadelphia Flyers',
-    GP: 82,
-    W: 46,
-    L: 20,
-    OTW: 10,
-    OTL: 6,
-    GF: 265,
-    GA: 210,
-    postSeason: 'Conference SF loss'
-  },
-  {
-    name: 'Detroit Red Wings',
-    GP: 82,
-    W: 44,
-    L: 24,
-    OTW: 8,
-    OTL: 6,
-    GF: 255,
-    GA: 220,
-    postSeason: 'Conference QF loss'
-  },
-  {
-    name: 'Chicago Blackhawks',
-    GP: 82,
-    W: 40,
-    L: 28,
-    OTW: 9,
-    OTL: 5,
-    GF: 245,
-    GA: 230,
-    postSeason: 'Conference Finals loss'
-  },
-  {
-    name: 'Pittsburgh Penguins',
-    GP: 82,
-    W: 42,
-    L: 26,
-    OTW: 8,
-    OTL: 6,
-    GF: 250,
-    GA: 235,
-    postSeason: 'Stanley Cup Champions'
-  }
-]
 
 const columnHelper = createColumnHelper<Team>()
 
@@ -105,37 +29,37 @@ const columns = [
     footer: info => info.column.id,
   }),
   columnHelper.accessor('GP', {
-    header: () => 'Games Played',
+    header: () => 'GP',
     cell: info => info.renderValue(),
     footer: info => info.column.id,
   }),
   columnHelper.accessor('W', {
-    header: 'Wins',
+    header: 'W',
     cell: info => info.renderValue(),
     footer: info => info.column.id,
   }),
   columnHelper.accessor('L', {
-    header: 'Losses',
+    header: 'L',
     cell: info => info.renderValue(),
     footer: info => info.column.id,
   }),
   columnHelper.accessor('OTW', {
-    header: 'Overtime Wins',
+    header: 'OTW',
     cell: info => info.renderValue(),
     footer: info => info.column.id,
   }),
   columnHelper.accessor('OTL', {
-    header: 'Overtime Losses',
+    header: 'OTL',
     cell: info => info.renderValue(),
     footer: info => info.column.id,
   }),
   columnHelper.accessor('GF', {
-    header: 'Goals For',
+    header: 'GF',
     cell: info => info.renderValue(),
     footer: info => info.column.id,
   }),
   columnHelper.accessor('GA', {
-    header: 'Goals Against',
+    header: 'GA',
     cell: info => info.renderValue(),
     footer: info => info.column.id,
   }),
@@ -144,11 +68,27 @@ const columns = [
     cell: info => info.renderValue(),
     footer: info => info.column.id,
   }),
+  columnHelper.accessor('+/-', {
+    header: '+/-',
+    cell: info => info.row.getValue<number>('GF') - info.row.getValue<number>('GA'),
+    footer: info => info.column.id,
+  }),
+  columnHelper.accessor('TP', {
+    header: 'TP',
+    cell: info => info.row.getValue<number>('W') * 2 + info.row.getValue<number>('OTL'),
+    footer: info => info.column.id,
+  }),
+  columnHelper.accessor('PGP', {
+    header: 'P/GP',
+    cell: info => ((info.row.getValue<number>('W') * 2 + info.row.getValue<number>('OTL')) / info.row.getValue<number>('GP')).toFixed(2),
+    footer: info => info.column.id,
+  }),
+
 ]
 
 
 export default function Home() {
-  const [data, setData] = useState(() => [...defaultData])
+  const [data, setData] = useState(() => [])
 
   useEffect(() => {
     const fetchTeamData = async () => {
@@ -159,7 +99,7 @@ export default function Home() {
       }
 
       const data = await response.json();
-      console.log({data})
+      setData(data)
     };
 
     fetchTeamData()
