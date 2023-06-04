@@ -1,5 +1,4 @@
 'use client'
-import styles from './page.module.css'
 import { useState, useEffect } from 'react'
 import {
   useReactTable,
@@ -11,12 +10,15 @@ import {
 } from '@tanstack/react-table'
 import {
   Table,
+  Stack,
   Tbody,
   Thead,
   Tr,
   Th,
   Td,
   TableContainer,
+  Center,
+  Heading,
 } from '@chakra-ui/react'
 
 type Team = {
@@ -113,8 +115,8 @@ const columns = [
 ]
 
 export default function Home() {
-  const [data, setData] = useState<any[]>(() => [])
-  const [sorting, setSorting] = useState([])
+  const [data, setData] = useState<Team[]>(() => [])
+  const [sorting, setSorting] = useState<SortingState>([])
 
   useEffect(() => {
     const fetchTeamData = async () => {
@@ -143,9 +145,10 @@ export default function Home() {
   })
 
   return (
-    <main className={styles.main}>
-      <div className={styles.center}>
-        <div className='p-2'>
+    <main>
+      <Center w='100%' h='100vh' p='4'>
+        <Stack>
+          <Heading>NHL Conferences</Heading>
           <TableContainer
             borderWidth='1px'
             borderStyle='solid'
@@ -194,8 +197,8 @@ export default function Home() {
               </Tbody>
             </Table>
           </TableContainer>
-        </div>
-      </div>
+        </Stack>
+      </Center>
     </main>
   )
 }
