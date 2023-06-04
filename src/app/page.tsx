@@ -117,6 +117,17 @@ const columns = [
 export default function Home() {
   const [data, setData] = useState<Team[]>(() => [])
   const [sorting, setSorting] = useState<SortingState>([])
+  const [expandedRows, setExpandedRows] = useState<string[]>([])
+
+  const toggleRowExpanded = (rowId: string) => {
+    setExpandedRows((currentRows) => {
+      if (currentRows.includes(rowId)) {
+        return currentRows.filter((id) => id !== rowId)
+      } else {
+        return [...currentRows, rowId]
+      }
+    })
+  }
 
   useEffect(() => {
     const fetchTeamData = async () => {
@@ -183,16 +194,25 @@ export default function Home() {
               </Thead>
               <Tbody>
                 {table.getRowModel().rows.map((row) => (
-                  <Tr key={row.id}>
-                    {row.getVisibleCells().map((cell) => (
-                      <Td key={cell.id}>
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )}
-                      </Td>
-                    ))}
-                  </Tr>
+                  <>
+                    <Tr key={row.id} onClick={() => toggleRowExpanded(row.id)}>
+                      {row.getVisibleCells().map((cell) => (
+                        <Td key={cell.id}>
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </Td>
+                      ))}
+                    </Tr>
+                    {expandedRows.includes(row.id) && (
+                      <Tr key={row.id + '-expanded'}>
+                        <Td colSpan={columns.length}>
+                          <p>Expanded content for {row.getValue('name')}</p>
+                        </Td>
+                      </Tr>
+                    )}
+                  </>
                 ))}
               </Tbody>
             </Table>
