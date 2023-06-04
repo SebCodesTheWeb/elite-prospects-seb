@@ -20,6 +20,10 @@ import {
   TableContainer,
   Center,
   Heading,
+  Box,
+  Image,
+  Text,
+  Link,
 } from '@chakra-ui/react'
 
 type Team = {
@@ -36,6 +40,20 @@ type Team = {
   TP?: number
   PGP?: number
   '+/-': number
+  extra: {
+    logo: string
+    founded: number
+    arena: {
+      name: string
+      location: string
+      capacity: number
+      yearOfConstruction: number
+    }
+    colors: string
+    links: {
+      officialWebUrl: string
+    }
+  }
 }
 
 const columnHelper = createColumnHelper<Team>()
@@ -224,7 +242,44 @@ export default function Home() {
                           }}
                         >
                           <Td colSpan={columns.length}>
-                            <p>Expanded content for {row.getValue('name')}</p>
+                            <Box display='flex' justifyContent='space-between'>
+                              <Image
+                                src={row.original.extra.logo}
+                                alt={`${row.original.name} logo`}
+                                boxSize='50px'
+                              />
+                              <Box>
+                                <Text>
+                                  <b>Founded:</b> {row.original.extra.founded}
+                                </Text>
+                                <Text>
+                                  <b>Arena:</b> {row.original.extra.arena.name}
+                                </Text>
+                                <Text>
+                                  <b>Location:</b>{' '}
+                                  {row.original.extra.arena.location}
+                                </Text>
+                                <Text>
+                                  <b>Capacity:</b>{' '}
+                                  {row.original.extra.arena.capacity}
+                                </Text>
+                                <Text>
+                                  <b>Year of Construction:</b>{' '}
+                                  {row.original.extra.arena.yearOfConstruction}
+                                </Text>
+                              </Box>
+                              <Box>
+                                <Text>
+                                  <b>Colors:</b> {row.original.extra.colors}
+                                </Text>
+                                <Link
+                                  href={row.original.extra.links.officialWebUrl}
+                                  isExternal
+                                >
+                                  Official Website
+                                </Link>
+                              </Box>
+                            </Box>
                           </Td>
                         </motion.tr>
                       )}

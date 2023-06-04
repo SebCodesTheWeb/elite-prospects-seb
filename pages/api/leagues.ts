@@ -9,6 +9,20 @@ type Team = {
   GA: number
   postSeason: string
   division: string
+  extra: {
+    logo: string
+    founded: number
+    arena: {
+      name: string
+      location: string
+      capacity: number
+      yearOfConstruction: number
+    }
+    colors: string
+    links: {
+      officialWebUrl: string
+    }
+  }
 }
 
 export default function getTeams(): Team[] {
@@ -24,6 +38,20 @@ export default function getTeams(): Team[] {
       GA: 177,
       postSeason: 'Conference QF loss',
       division: 'Atlantic',
+      extra: {
+        logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/1/12/Boston_Bruins.svg/1200px-Boston_Bruins.svg.png',
+        founded: 1924,
+        arena: {
+          name: 'TD Garden',
+          location: 'Boston, MA',
+          capacity: 17565,
+          yearOfConstruction: 1995,
+        },
+        colors: 'Black, Gold, White',
+        links: {
+          officialWebUrl: 'https://www.nhl.com/bruins',
+        },
+      },
     },
     {
       name: 'New York Rangers',
@@ -36,6 +64,20 @@ export default function getTeams(): Team[] {
       GA: 180,
       postSeason: 'Conference SF loss',
       division: 'Metropolitan',
+      extra: {
+        logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/1/12/Boston_Bruins.svg/1200px-Boston_Bruins.svg.png',
+        founded: 1924,
+        arena: {
+          name: 'TD Garden',
+          location: 'Boston, MA',
+          capacity: 17565,
+          yearOfConstruction: 1995,
+        },
+        colors: 'Black, Gold, White',
+        links: {
+          officialWebUrl: 'https://www.nhl.com/bruins',
+        },
+      },
     },
     {
       name: 'Montreal Canadiens',
@@ -48,6 +90,20 @@ export default function getTeams(): Team[] {
       GA: 185,
       postSeason: 'Division Finals loss',
       division: 'Atlantic',
+      extra: {
+        logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/1/12/Boston_Bruins.svg/1200px-Boston_Bruins.svg.png',
+        founded: 1924,
+        arena: {
+          name: 'TD Garden',
+          location: 'Boston, MA',
+          capacity: 17565,
+          yearOfConstruction: 1995,
+        },
+        colors: 'Black, Gold, White',
+        links: {
+          officialWebUrl: 'https://www.nhl.com/bruins',
+        },
+      },
     },
     {
       name: 'Philadelphia Flyers',
@@ -60,6 +116,20 @@ export default function getTeams(): Team[] {
       GA: 210,
       postSeason: 'Conference SF loss',
       division: 'Metropolitan',
+      extra: {
+        logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/1/12/Boston_Bruins.svg/1200px-Boston_Bruins.svg.png',
+        founded: 1924,
+        arena: {
+          name: 'TD Garden',
+          location: 'Boston, MA',
+          capacity: 17565,
+          yearOfConstruction: 1995,
+        },
+        colors: 'Black, Gold, White',
+        links: {
+          officialWebUrl: 'https://www.nhl.com/bruins',
+        },
+      },
     },
     {
       name: 'Detroit Red Wings',
@@ -72,6 +142,20 @@ export default function getTeams(): Team[] {
       GA: 220,
       postSeason: 'Conference QF loss',
       division: 'Central',
+      extra: {
+        logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/1/12/Boston_Bruins.svg/1200px-Boston_Bruins.svg.png',
+        founded: 1924,
+        arena: {
+          name: 'TD Garden',
+          location: 'Boston, MA',
+          capacity: 17565,
+          yearOfConstruction: 1995,
+        },
+        colors: 'Black, Gold, White',
+        links: {
+          officialWebUrl: 'https://www.nhl.com/bruins',
+        },
+      },
     },
     {
       name: 'Chicago Blackhawks',
@@ -84,6 +168,20 @@ export default function getTeams(): Team[] {
       GA: 230,
       postSeason: 'Conference Finals loss',
       division: 'Central',
+      extra: {
+        logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/1/12/Boston_Bruins.svg/1200px-Boston_Bruins.svg.png',
+        founded: 1924,
+        arena: {
+          name: 'TD Garden',
+          location: 'Boston, MA',
+          capacity: 17565,
+          yearOfConstruction: 1995,
+        },
+        colors: 'Black, Gold, White',
+        links: {
+          officialWebUrl: 'https://www.nhl.com/bruins',
+        },
+      },
     },
     {
       name: 'Pittsburgh Penguins',
@@ -96,6 +194,20 @@ export default function getTeams(): Team[] {
       GA: 235,
       postSeason: 'Stanley Cup Champions',
       division: 'Metropolitan',
+      extra: {
+        logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/1/12/Boston_Bruins.svg/1200px-Boston_Bruins.svg.png',
+        founded: 1924,
+        arena: {
+          name: 'TD Garden',
+          location: 'Boston, MA',
+          capacity: 17565,
+          yearOfConstruction: 1995,
+        },
+        colors: 'Black, Gold, White',
+        links: {
+          officialWebUrl: 'https://www.nhl.com/bruins',
+        },
+      },
     },
   ]
 
