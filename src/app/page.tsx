@@ -183,14 +183,15 @@ export default function Home() {
     <main>
       <Center w='100%' h='100vh' p='4'>
         <Stack>
-          <Heading>NHL Conferences</Heading>
+          <Heading>NHL Standings</Heading>
           <TableContainer
             borderWidth='1px'
             borderStyle='solid'
             borderColor='gray.600'
             borderRadius='4px'
+            bgColor='white'
           >
-            <Table variant='striped' colorScheme='gray'>
+            <Table variant='striped' colorScheme='linkedin'>
               <Thead>
                 {table.getHeaderGroups().map((headerGroup) => (
                   <Tr key={headerGroup.id}>
