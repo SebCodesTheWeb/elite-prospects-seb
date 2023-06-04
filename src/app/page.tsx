@@ -9,6 +9,7 @@ import {
   getSortedRowModel,
   SortingState,
 } from '@tanstack/react-table'
+import { Table, Tbody, Thead, Tr, Th, Td } from '@chakra-ui/react'
 
 type Team = {
   name: string
@@ -137,12 +138,12 @@ export default function Home() {
     <main className={styles.main}>
       <div className={styles.center}>
         <div className='p-2'>
-          <table>
-            <thead>
+          <Table>
+            <Thead>
               {table.getHeaderGroups().map((headerGroup) => (
-                <tr key={headerGroup.id}>
+                <Tr key={headerGroup.id}>
                   {headerGroup.headers.map((header) => (
-                    <th
+                    <Th
                       key={header.id}
                       onClick={header.column.getToggleSortingHandler()}
                     >
@@ -156,26 +157,26 @@ export default function Home() {
                         asc: ' 🔼',
                         desc: ' 🔽',
                       }[header.column.getIsSorted() as string] ?? null}
-                    </th>
+                    </Th>
                   ))}
-                </tr>
+                </Tr>
               ))}
-            </thead>
-            <tbody>
+            </Thead>
+            <Tbody>
               {table.getRowModel().rows.map((row) => (
-                <tr key={row.id}>
+                <Tr key={row.id}>
                   {row.getVisibleCells().map((cell) => (
-                    <td key={cell.id}>
+                    <Td key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
                       )}
-                    </td>
+                    </Td>
                   ))}
-                </tr>
+                </Tr>
               ))}
-            </tbody>
-          </table>
+            </Tbody>
+          </Table>
         </div>
       </div>
     </main>
