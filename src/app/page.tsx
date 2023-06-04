@@ -24,6 +24,7 @@ import {
   Image,
   Text,
   Link,
+  Skeleton,
 } from '@chakra-ui/react'
 
 type Team = {
@@ -184,117 +185,128 @@ export default function Home() {
       <Center w='100%' h='100vh' p='4'>
         <Stack>
           <Heading>NHL Standings</Heading>
-          <TableContainer
-            borderWidth='1px'
-            borderStyle='solid'
-            borderColor='gray.600'
-            borderRadius='4px'
-            bgColor='white'
-          >
-            <Table variant='striped' colorScheme='linkedin'>
-              <Thead>
-                {table.getHeaderGroups().map((headerGroup) => (
-                  <Tr key={headerGroup.id}>
-                    {headerGroup.headers.map((header) => (
-                      <Th
-                        key={header.id}
-                        onClick={header.column.getToggleSortingHandler()}
-                        cursor='pointer'
-                        userSelect='none'
-                      >
-                        {header.isPlaceholder
-                          ? null
-                          : flexRender(
-                              header.column.columnDef.header,
-                              header.getContext()
-                            )}
-                        {{
-                          asc: ' ▲',
-                          desc: '▼',
-                        }[header.column.getIsSorted() as string] ?? null}
-                      </Th>
-                    ))}
-                  </Tr>
-                ))}
-              </Thead>
-              <Tbody>
-                {table.getRowModel().rows.map((row) => (
-                  <>
-                    <Tr
-                      key={row.id}
-                      onClick={() => toggleRowExpanded(row.id)}
-                      cursor='pointer'
-                      _hover={{ opacity: 0.5 }}
-                    >
-                      {row.getVisibleCells().map((cell) => (
-                        <Td key={cell.id}>
-                          {flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext()
-                          )}
-                        </Td>
+          <Skeleton isLoaded={data.length > 0}>
+            <TableContainer
+              borderWidth='1px'
+              borderStyle='solid'
+              borderColor='gray.600'
+              borderRadius='4px'
+              bgColor='white'
+            >
+              <Table variant='striped' colorScheme='linkedin'>
+                <Thead>
+                  {table.getHeaderGroups().map((headerGroup) => (
+                    <Tr key={headerGroup.id}>
+                      {headerGroup.headers.map((header) => (
+                        <Th
+                          key={header.id}
+                          onClick={header.column.getToggleSortingHandler()}
+                          cursor='pointer'
+                          userSelect='none'
+                        >
+                          {header.isPlaceholder
+                            ? null
+                            : flexRender(
+                                header.column.columnDef.header,
+                                header.getContext()
+                              )}
+                          {{
+                            asc: ' ▲',
+                            desc: '▼',
+                          }[header.column.getIsSorted() as string] ?? null}
+                        </Th>
                       ))}
                     </Tr>
-                    <AnimatePresence initial={false}>
-                      {expandedRows.includes(row.id) && (
-                        <motion.tr
-                          key={row.id + '-expanded'}
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: 'auto' }}
-                          exit={{ opacity: 0, height: 0 }}
-                          transition={{
-                            opacity: { duration: 0.3 },
-                            height: { duration: 0.4 },
-                          }}
-                        >
-                          <Td colSpan={columns.length}>
-                            <Box display='flex' justifyContent='space-between'>
-                              <Image
-                                src={row.original.extra.logo}
-                                alt={`${row.original.name} logo`}
-                                boxSize='50px'
-                              />
-                              <Box>
-                                <Text>
-                                  <b>Founded:</b> {row.original.extra.founded}
-                                </Text>
-                                <Text>
-                                  <b>Arena:</b> {row.original.extra.arena.name}
-                                </Text>
-                                <Text>
-                                  <b>Location:</b>{' '}
-                                  {row.original.extra.arena.location}
-                                </Text>
-                                <Text>
-                                  <b>Capacity:</b>{' '}
-                                  {row.original.extra.arena.capacity}
-                                </Text>
-                                <Text>
-                                  <b>Year of Construction:</b>{' '}
-                                  {row.original.extra.arena.yearOfConstruction}
-                                </Text>
-                              </Box>
-                              <Box>
-                                <Text>
-                                  <b>Colors:</b> {row.original.extra.colors}
-                                </Text>
-                                <Link
-                                  href={row.original.extra.links.officialWebUrl}
-                                  isExternal
-                                >
-                                  Official Website
-                                </Link>
-                              </Box>
-                            </Box>
+                  ))}
+                </Thead>
+                <Tbody>
+                  {table.getRowModel().rows.map((row) => (
+                    <>
+                      <Tr
+                        key={row.id}
+                        onClick={() => toggleRowExpanded(row.id)}
+                        cursor='pointer'
+                        _hover={{ opacity: 0.5 }}
+                      >
+                        {row.getVisibleCells().map((cell) => (
+                          <Td key={cell.id}>
+                            {flexRender(
+                              cell.column.columnDef.cell,
+                              cell.getContext()
+                            )}
                           </Td>
-                        </motion.tr>
-                      )}
-                    </AnimatePresence>
-                  </>
-                ))}
-              </Tbody>
-            </Table>
-          </TableContainer>
+                        ))}
+                      </Tr>
+                      <AnimatePresence initial={false}>
+                        {expandedRows.includes(row.id) && (
+                          <motion.tr
+                            key={row.id + '-expanded'}
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{
+                              opacity: { duration: 0.3 },
+                              height: { duration: 0.4 },
+                            }}
+                          >
+                            <Td colSpan={columns.length}>
+                              <Box
+                                display='flex'
+                                justifyContent='space-between'
+                              >
+                                <Image
+                                  src={row.original.extra.logo}
+                                  alt={`${row.original.name} logo`}
+                                  boxSize='50px'
+                                />
+                                <Box>
+                                  <Text>
+                                    <b>Founded:</b> {row.original.extra.founded}
+                                  </Text>
+                                  <Text>
+                                    <b>Arena:</b>{' '}
+                                    {row.original.extra.arena.name}
+                                  </Text>
+                                  <Text>
+                                    <b>Location:</b>{' '}
+                                    {row.original.extra.arena.location}
+                                  </Text>
+                                  <Text>
+                                    <b>Capacity:</b>{' '}
+                                    {row.original.extra.arena.capacity}
+                                  </Text>
+                                  <Text>
+                                    <b>Year of Construction:</b>{' '}
+                                    {
+                                      row.original.extra.arena
+                                        .yearOfConstruction
+                                    }
+                                  </Text>
+                                </Box>
+                                <Box>
+                                  <Text>
+                                    <b>Colors:</b> {row.original.extra.colors}
+                                  </Text>
+                                  <Link
+                                    href={
+                                      row.original.extra.links.officialWebUrl
+                                    }
+                                    isExternal
+                                  >
+                                    Official Website
+                                  </Link>
+                                </Box>
+                              </Box>
+                            </Td>
+                          </motion.tr>
+                        )}
+                      </AnimatePresence>
+                    </>
+                  ))}
+                </Tbody>
+              </Table>
+            </TableContainer>
+          </Skeleton>
         </Stack>
       </Center>
     </main>
