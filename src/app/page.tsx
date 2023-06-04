@@ -1,6 +1,6 @@
 'use client';
 import styles from './page.module.css'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useReactTable, createColumnHelper, getCoreRowModel, flexRender } from '@tanstack/react-table'
 
 
@@ -149,6 +149,22 @@ const columns = [
 
 export default function Home() {
   const [data, setData] = useState(() => [...defaultData])
+
+  useEffect(() => {
+    const fetchTeamData = async () => {
+      const response = await fetch("/api/leagues");
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log({data})
+    };
+
+    fetchTeamData()
+      .catch(e => console.error('There was an error!', e));
+  }, []);
 
   const table = useReactTable({
     data,
