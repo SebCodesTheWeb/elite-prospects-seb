@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import {
   useReactTable,
   createColumnHelper,
@@ -195,7 +196,12 @@ export default function Home() {
               <Tbody>
                 {table.getRowModel().rows.map((row) => (
                   <>
-                    <Tr key={row.id} onClick={() => toggleRowExpanded(row.id)}>
+                    <Tr
+                      key={row.id}
+                      onClick={() => toggleRowExpanded(row.id)}
+                      cursor='pointer'
+                      _hover={{ opacity: 0.5 }}
+                    >
                       {row.getVisibleCells().map((cell) => (
                         <Td key={cell.id}>
                           {flexRender(
@@ -205,13 +211,24 @@ export default function Home() {
                         </Td>
                       ))}
                     </Tr>
-                    {expandedRows.includes(row.id) && (
-                      <Tr key={row.id + '-expanded'}>
-                        <Td colSpan={columns.length}>
-                          <p>Expanded content for {row.getValue('name')}</p>
-                        </Td>
-                      </Tr>
-                    )}
+                    <AnimatePresence initial={false}>
+                      {expandedRows.includes(row.id) && (
+                        <motion.tr
+                          key={row.id + '-expanded'}
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{
+                            opacity: { duration: 0.3 },
+                            height: { duration: 0.4 },
+                          }}
+                        >
+                          <Td colSpan={columns.length}>
+                            <p>Expanded content for {row.getValue('name')}</p>
+                          </Td>
+                        </motion.tr>
+                      )}
+                    </AnimatePresence>
                   </>
                 ))}
               </Tbody>
