@@ -15,6 +15,7 @@ type Team = {
   GF: number;
   GA: number;
   postSeason: string;
+  division: string;
   TP?: number;
   PGP?: number; 
   '+/-': number;
@@ -26,6 +27,11 @@ const columns = [
   columnHelper.accessor('name', {
     cell: info => info.getValue(),
     header: () => <span>Team</span>,
+    footer: info => info.column.id,
+  }),
+  columnHelper.accessor('division', {
+    header: () => 'Division',
+    cell: info => info.renderValue(),
     footer: info => info.column.id,
   }),
   columnHelper.accessor('GP', {
