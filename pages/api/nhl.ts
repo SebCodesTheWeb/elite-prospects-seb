@@ -1,8 +1,14 @@
-import Redis from 'ioredis'
 import { NextApiRequest, NextApiResponse } from 'next'
 import getTeams from './leagues'
+import { createClient } from 'redis'
 
-const client = new Redis(process.env.REDIS_URL || '')
+const client = createClient({
+  password: process.env.REDIS_PASSWORD,
+  socket: {
+    host: process.env.REDIS_HOST,
+    port: parseInt(process.env.REDIS_PORT || ''),
+  },
+})
 
 client.on('connect', function () {
   console.log('Redis client connected')
@@ -18,6 +24,7 @@ export default async function handler(
 ) {
   const key = req.url || ''
 
+  await client.connect()
   const data = await client.get(key)
 
   if (false && data) {
