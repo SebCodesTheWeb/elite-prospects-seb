@@ -12,7 +12,6 @@ import {
   Box,
   Image,
   Text,
-  Link,
   Skeleton,
 } from '@chakra-ui/react'
 import { useStandingsTable } from './use-standings-table'
