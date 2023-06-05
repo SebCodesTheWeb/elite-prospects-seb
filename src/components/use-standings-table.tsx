@@ -18,8 +18,8 @@ const columnHelper = createColumnHelper<Team>()
 
 const columns = [
   columnHelper.accessor('name', {
-    cell: (info) => info.getValue(),
-    header: () => <span>Team</span>,
+    header: () => 'Team',
+    cell: (info) => info.renderValue(),
   }),
   columnHelper.accessor('division', {
     header: () => 'Division',
@@ -59,22 +59,15 @@ const columns = [
   }),
   columnHelper.accessor('+/-', {
     header: '+/-',
-    cell: (info) =>
-      info.row.getValue<number>('GF') - info.row.getValue<number>('GA'),
+    cell: (info) => info.renderValue(),
   }),
   columnHelper.accessor('TP', {
     header: 'TP',
-    cell: (info) =>
-      info.row.getValue<number>('W') * 2 + info.row.getValue<number>('OTL'),
+    cell: (info) => info.renderValue(),
   }),
   columnHelper.accessor('PGP', {
     header: 'P/GP',
-    cell: (info) =>
-      (
-        (info.row.getValue<number>('W') * 2 +
-          info.row.getValue<number>('OTL')) /
-        info.row.getValue<number>('GP')
-      ).toFixed(2),
+    cell: (info) => info.renderValue(),
   }),
 ]
 
@@ -85,7 +78,15 @@ const fetchStandings = async (): Promise<Team[]> => {
   }
 
   const data = await response.json()
-  return data
+
+  const dataWithExtraDerivedColumns = data.map((team: Team) => ({
+    ...team,
+    '+/-': team.GF - team.GA,
+    TP: team.W * 2 + team.OTL,
+    PGP: ((team.W * 2 + team.OTL) / team.GP).toFixed(2),
+  }))
+
+  return dataWithExtraDerivedColumns
 }
 
 export const useStandingsTable = () => {
