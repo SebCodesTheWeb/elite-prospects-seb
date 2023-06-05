@@ -1,4 +1,3 @@
-import { Inter } from 'next/font/google'
 import { ChakraProviders } from './providers'
 
 export const metadata = {
