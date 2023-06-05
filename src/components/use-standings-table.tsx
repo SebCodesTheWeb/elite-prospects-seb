@@ -79,14 +79,7 @@ const fetchStandings = async (): Promise<Team[]> => {
 
   const data = await response.json()
 
-  const dataWithExtraDerivedColumns = data.map((team: Team) => ({
-    ...team,
-    '+/-': team.GF - team.GA,
-    TP: team.W * 2 + team.OTL,
-    PGP: ((team.W * 2 + team.OTL) / team.GP).toFixed(2),
-  }))
-
-  return dataWithExtraDerivedColumns
+  return data
 }
 
 export const useStandingsTable = () => {

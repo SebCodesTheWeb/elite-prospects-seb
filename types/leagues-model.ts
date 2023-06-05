@@ -7,6 +7,9 @@ export type Team = {
   OTL: number
   GF: number
   GA: number
+  '+/-': number
+  TP: number
+  PGP: number
   postSeason: string
   division: string
   logo: string

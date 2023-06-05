@@ -10,6 +10,13 @@ export const NHLAdapter = (standingsData: TeamStatsData[]): Team[] => {
     OTL: teamData.stats.OTL,
     GF: teamData.stats.GF,
     GA: teamData.stats.GA,
+    '+/-': teamData.stats.GF - teamData.stats.GA,
+    TP: teamData.stats.W * 2 - teamData.stats.OTL,
+    PGP: parseFloat(
+      ((teamData.stats.W * 2 - teamData.stats.OTL) / teamData.stats.GP).toFixed(
+        2
+      )
+    ),
     postSeason: teamData.postseason,
     division: teamData.group,
     logo: teamData.team.logoUrl,
