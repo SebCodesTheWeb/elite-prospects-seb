@@ -24,9 +24,9 @@ export const StandingsTable = () => {
   return (
     <Skeleton isLoaded={!isLoading}>
       <TableContainer
-        borderWidth='1px'
+        borderWidth='2px'
         borderStyle='solid'
-        borderColor='gray.600'
+        borderColor='gray.200'
         borderRadius='4px'
         bgColor='white'
         maxH='1000px'
