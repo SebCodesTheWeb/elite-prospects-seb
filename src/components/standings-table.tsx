@@ -32,7 +32,7 @@ export const StandingsTable = () => {
         maxH='1000px'
         overflowY='auto'
       >
-        <Table variant='striped' colorScheme='linkedin'>
+        <Table variant='striped' colorScheme='linkedin' size="sm">
           <Thead>
             {table.getHeaderGroups().map((headerGroup) => (
               <Tr key={headerGroup.id}>
@@ -91,40 +91,28 @@ export const StandingsTable = () => {
                       <Td colSpan={table.getAllColumns().length}>
                         <Box display='flex' justifyContent='space-between'>
                           <Image
-                            src={row.original.extra.logo}
+                            src={row.original.logo}
                             alt={`${row.original.name} logo`}
                             boxSize='50px'
                           />
                           <Box>
                             <Text>
-                              <b>Founded:</b> {row.original.extra.founded}
+                              <b>Founded:</b> {row.original.founded}
                             </Text>
                             <Text>
-                              <b>Arena:</b> {row.original.extra.arena.name}
+                              <b>Arena:</b> {row.original.arena}
                             </Text>
                             <Text>
-                              <b>Location:</b>{' '}
-                              {row.original.extra.arena.location}
+                              <b>Country:</b> {row.original.country}
                             </Text>
                             <Text>
-                              <b>Capacity:</b>{' '}
-                              {row.original.extra.arena.capacity}
-                            </Text>
-                            <Text>
-                              <b>Year of Construction:</b>{' '}
-                              {row.original.extra.arena.yearOfConstruction}
+                              <b>City:</b> {row.original.city}
                             </Text>
                           </Box>
                           <Box>
                             <Text>
-                              <b>Colors:</b> {row.original.extra.colors}
+                              <b>Colors:</b> {row.original.colors}
                             </Text>
-                            <Link
-                              href={row.original.extra.links.officialWebUrl}
-                              isExternal
-                            >
-                              Official Website
-                            </Link>
                           </Box>
                         </Box>
                       </Td>

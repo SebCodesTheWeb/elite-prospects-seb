@@ -6,7 +6,7 @@ import {
   SortingState,
   createColumnHelper,
 } from '@tanstack/react-table'
-import { Team as TeamModel } from '../../pages/api/leagues'
+import { Team as TeamModel } from '../../types/leagues-model'
 import { useQuery } from '@tanstack/react-query'
 
 type Team = TeamModel & {

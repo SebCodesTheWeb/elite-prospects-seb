@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import getTeams from './leagues'
 import { createClient } from 'redis'
+import { Team, TeamStatsData } from '../../types/leagues-model'
+import { NHLAdapter } from './lib/nhl.adapter'
 
 const client = createClient({
   password: process.env.REDIS_PASSWORD,
@@ -20,26 +21,29 @@ client.on('error', function (err) {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse<Team[]>
 ) {
   const key = req.url || ''
 
   await client.connect()
+
   const data = await client.get(key)
 
-  if (false && data) {
-    //@ts-ignore
+  if (data) {
     res.send(JSON.parse(data))
   } else {
-    // const response = await fetch("/api/leagues");
-    // const apiData = await response.json();
-    const apiData = getTeams()
-    console.log({ apiData })
+    const response = await fetch(
+      `https://api.eliteprospects.com/v1/leagues/nhl/standings?apiKey=${process.env.API_KEY}`
+    )
 
-    // Store the API response in Redis, set it to expire after 1 hour
-    // await client.set(key, JSON.stringify(apiData), 'EX', 3600)
+    const apiData = await response.json()
 
-    res.send(apiData)
+    const formattedApiData = NHLAdapter(apiData.data as TeamStatsData[])
+
+    await client.set(key, JSON.stringify(formattedApiData))
+    await client.expire(key, 3600)
+
+    res.send(formattedApiData)
   }
 
   client.disconnect()
