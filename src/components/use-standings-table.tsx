@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import {
   useReactTable,
   getCoreRowModel,
@@ -7,6 +7,7 @@ import {
   createColumnHelper,
 } from '@tanstack/react-table'
 import { Team as TeamModel } from '../../pages/api/leagues'
+import { useQuery } from '@tanstack/react-query'
 
 type Team = TeamModel & {
   '+/-'?: number
@@ -90,8 +91,17 @@ const columns = [
   }),
 ]
 
+const fetchStandings = async (): Promise<Team[]> => {
+  const response = await fetch('/api/nhl')
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`)
+  }
+
+  const data = await response.json()
+  return data
+}
+
 export const useStandingsTable = () => {
-  const [data, setData] = useState<Team[]>(() => [])
   const [sorting, setSorting] = useState<SortingState>([
     {
       id: 'division',
@@ -100,30 +110,18 @@ export const useStandingsTable = () => {
   ])
   const [expandedRows, setExpandedRows] = useState<string[]>([])
 
-  const toggleRowExpanded = (rowId: string) => {
-    setExpandedRows((currentRows) => {
-      if (currentRows.includes(rowId)) {
-        return currentRows.filter((id) => id !== rowId)
-      } else {
-        return [...currentRows, rowId]
-      }
-    })
+  const {
+    isLoading,
+    error,
+    data = [],
+  } = useQuery({
+    queryKey: ['standings'],
+    queryFn: fetchStandings,
+  })
+
+  if (error) {
+    throw new Error(`Err: ${error}`)
   }
-
-  useEffect(() => {
-    const fetchTeamData = async () => {
-      const response = await fetch('/api/nhl')
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`)
-      }
-
-      const data = await response.json()
-      setData(data)
-    }
-
-    fetchTeamData().catch((e) => console.error('There was an error!', e))
-  }, [])
 
   const table = useReactTable({
     data,
@@ -136,9 +134,20 @@ export const useStandingsTable = () => {
     getSortedRowModel: getSortedRowModel(),
   })
 
+  const toggleRowExpanded = (rowId: string) => {
+    setExpandedRows((currentRows) => {
+      if (currentRows.includes(rowId)) {
+        return currentRows.filter((id) => id !== rowId)
+      } else {
+        return [...currentRows, rowId]
+      }
+    })
+  }
+
   return {
     table,
     expandedRows,
     toggleRowExpanded,
+    isLoading,
   }
 }

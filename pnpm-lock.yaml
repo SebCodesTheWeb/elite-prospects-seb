@@ -5,6 +5,7 @@ specifiers:
   '@chakra-ui/react': ^2.7.0
   '@emotion/react': ^11.11.0
   '@emotion/styled': ^11.11.0
+  '@tanstack/react-query': ^4.29.12
   '@tanstack/react-table': ^8.9.1
   '@types/node': 20.2.5
   '@types/react': 18.2.8
@@ -23,6 +24,7 @@ dependencies:
   '@chakra-ui/react': 2.7.0_cm4ap3muhrzhxlo3cutrp45gd4
   '@emotion/react': 11.11.0_i2bxsyfskhzbpjanbovidbfj7u
   '@emotion/styled': 11.11.0_efnsujvwehy5in7hodous2swsa
+  '@tanstack/react-query': 4.29.12_biqbaboplfbrettd7655fr4n2y
   '@tanstack/react-table': 8.9.1_biqbaboplfbrettd7655fr4n2y
   '@types/node': 20.2.5
   '@types/react': 18.2.8
@@ -1549,6 +1551,28 @@ packages:
     resolution: {integrity: sha512-sJ902EfIzn1Fa+qYmjdQqh8tPsoxyBz+8yBKC2HKUxyezKJFwPGOn7pv4WY6QuQW//ySQi5lJjA/ZT9sNWWNTg==}
     dependencies:
       tslib: 2.5.2
+    dev: false
+
+  /@tanstack/query-core/4.29.11:
+    resolution: {integrity: sha512-8C+hF6SFAb/TlFZyS9FItgNwrw4PMa7YeX+KQYe2ZAiEz6uzg6yIr+QBzPkUwZ/L0bXvGd1sufTm3wotoz+GwQ==}
+    dev: false
+
+  /@tanstack/react-query/4.29.12_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-zhcN6+zF6cxprxhTHQajHGlvxgK8npnp9uLe9yaWhGc6sYcPWXzyO4raL4HomUzQOPzu3jLvkriJQ7BOrDM8vA==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-native: '*'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+    dependencies:
+      '@tanstack/query-core': 4.29.11
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      use-sync-external-store: 1.2.0_react@18.2.0
     dev: false
 
   /@tanstack/react-table/8.9.1_biqbaboplfbrettd7655fr4n2y:
@@ -3977,6 +4001,14 @@ packages:
       detect-node-es: 1.1.0
       react: 18.2.0
       tslib: 2.5.2
+    dev: false
+
+  /use-sync-external-store/1.2.0_react@18.2.0:
+    resolution: {integrity: sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /which-boxed-primitive/1.0.2:

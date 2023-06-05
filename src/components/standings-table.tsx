@@ -1,14 +1,6 @@
 'use client'
-import { useState, useEffect } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import {
-  useReactTable,
-  createColumnHelper,
-  getCoreRowModel,
-  flexRender,
-  getSortedRowModel,
-  SortingState,
-} from '@tanstack/react-table'
+import { flexRender } from '@tanstack/react-table'
 import {
   Table,
   Tbody,
@@ -26,10 +18,11 @@ import {
 import { useStandingsTable } from './use-standings-table'
 
 export const StandingsTable = () => {
-  const { table, expandedRows, toggleRowExpanded } = useStandingsTable()
+  const { table, expandedRows, toggleRowExpanded, isLoading } =
+    useStandingsTable()
 
   return (
-    <Skeleton isLoaded={true}>
+    <Skeleton isLoaded={!isLoading}>
       <TableContainer
         borderWidth='1px'
         borderStyle='solid'
