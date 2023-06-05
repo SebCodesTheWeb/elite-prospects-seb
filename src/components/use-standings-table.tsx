@@ -20,64 +20,52 @@ const columns = [
   columnHelper.accessor('name', {
     cell: (info) => info.getValue(),
     header: () => <span>Team</span>,
-    footer: (info) => info.column.id,
   }),
   columnHelper.accessor('division', {
     header: () => 'Division',
     cell: (info) => info.renderValue(),
-    footer: (info) => info.column.id,
   }),
   columnHelper.accessor('GP', {
     header: () => 'GP',
     cell: (info) => info.renderValue(),
-    footer: (info) => info.column.id,
   }),
   columnHelper.accessor('W', {
     header: 'W',
     cell: (info) => info.renderValue(),
-    footer: (info) => info.column.id,
   }),
   columnHelper.accessor('L', {
     header: 'L',
     cell: (info) => info.renderValue(),
-    footer: (info) => info.column.id,
   }),
   columnHelper.accessor('OTW', {
     header: 'OTW',
     cell: (info) => info.renderValue(),
-    footer: (info) => info.column.id,
   }),
   columnHelper.accessor('OTL', {
     header: 'OTL',
     cell: (info) => info.renderValue(),
-    footer: (info) => info.column.id,
   }),
   columnHelper.accessor('GF', {
     header: 'GF',
     cell: (info) => info.renderValue(),
-    footer: (info) => info.column.id,
   }),
   columnHelper.accessor('GA', {
     header: 'GA',
     cell: (info) => info.renderValue(),
-    footer: (info) => info.column.id,
   }),
   columnHelper.accessor('postSeason', {
     header: 'Post Season',
     cell: (info) => info.renderValue(),
-    footer: (info) => info.column.id,
   }),
   columnHelper.accessor('+/-', {
     header: '+/-',
     cell: (info) =>
       info.row.getValue<number>('GF') - info.row.getValue<number>('GA'),
-    footer: (info) => info.column.id,
   }),
   columnHelper.accessor('TP', {
     header: 'TP',
     cell: (info) =>
       info.row.getValue<number>('W') * 2 + info.row.getValue<number>('OTL'),
-    footer: (info) => info.column.id,
   }),
   columnHelper.accessor('PGP', {
     header: 'P/GP',
@@ -87,7 +75,6 @@ const columns = [
           info.row.getValue<number>('OTL')) /
         info.row.getValue<number>('GP')
       ).toFixed(2),
-    footer: (info) => info.column.id,
   }),
 ]
 
