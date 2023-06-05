@@ -26,35 +26,12 @@ import {
   Link,
   Skeleton,
 } from '@chakra-ui/react'
+import { Team as TeamModel } from '../../pages/api/leagues'
 
-type Team = {
-  name: string
-  GP: number
-  W: number
-  L: number
-  OTW: number
-  OTL: number
-  GF: number
-  GA: number
-  postSeason: string
-  division: string
+type Team = TeamModel & {
+  '+/-'?: number
   TP?: number
   PGP?: number
-  '+/-': number
-  extra: {
-    logo: string
-    founded: number
-    arena: {
-      name: string
-      location: string
-      capacity: number
-      yearOfConstruction: number
-    }
-    colors: string
-    links: {
-      officialWebUrl: string
-    }
-  }
 }
 
 const columnHelper = createColumnHelper<Team>()

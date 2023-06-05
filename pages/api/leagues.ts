@@ -1,4 +1,4 @@
-type Team = {
+export type Team = {
   name: string
   GP: number
   W: number
