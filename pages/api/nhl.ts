@@ -21,6 +21,7 @@ export default async function handler(
   const data = await client.get(key)
 
   if (false && data) {
+    //@ts-ignore
     res.send(JSON.parse(data))
   } else {
     // const response = await fetch("/api/leagues");
