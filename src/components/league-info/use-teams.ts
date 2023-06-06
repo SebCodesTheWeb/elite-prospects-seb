@@ -1,16 +1,12 @@
+import axios from 'axios'
 import { DerivedTeamsReference } from '../../../types/teams-reference.model'
 import { useStandings } from '../utils/use-standings'
 import { useQuery } from '@tanstack/react-query'
 
 const fetchTeamsReference = async (): Promise<DerivedTeamsReference> => {
-  const response = await fetch('/api/teams-reference')
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`)
-  }
+  const response = await axios.get('/api/teams-reference')
 
-  const data = await response.json()
-
-  return data
+  return response.data
 }
 
 export const useTeams = () => {

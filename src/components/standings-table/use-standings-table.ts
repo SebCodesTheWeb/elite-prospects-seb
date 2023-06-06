@@ -9,6 +9,7 @@ import {
 import { Team } from '../../../types/standings.model'
 import { DerivedTeamData, PlaceholderTeamData } from '../../../types/team.model'
 import { useStandings } from '../utils/use-standings'
+import axios from 'axios'
 
 const columnHelper = createColumnHelper<Team>()
 
@@ -68,14 +69,9 @@ const columns = [
 ]
 
 const fetchExtraTeamData = async (teamId: number): Promise<DerivedTeamData> => {
-  const response = await fetch(`/api/team?teamId=${teamId}`)
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`)
-  }
+  const response = await axios.get(`/api/team?teamId=${teamId}`)
 
-  const data = await response.json()
-
-  return data
+  return response.data
 }
 
 export const useStandingsTable = () => {

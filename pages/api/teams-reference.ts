@@ -5,18 +5,19 @@ import {
   TeamsReference,
 } from '../../types/teams-reference.model'
 import { teamsReferenceAdapter } from './lib/teams-reference.adapter'
+import axios from 'axios'
 
 async function handler(
   _req: NextApiRequest,
   res: NextApiResponse<DerivedTeamsReference>
 ): Promise<DerivedTeamsReference> {
-  const response = await fetch(
+  const response = await axios.get(
     `https://api.eliteprospects.com/v1/leagues/nhl/teams?fields=links.%2A,logoUrl,id&apiKey=${process.env.API_KEY}`
   )
 
-  const apiData: TeamsReference = (await response.json()).data
+  const apiData = response.data
 
-  const formattedApiData = teamsReferenceAdapter(apiData)
+  const formattedApiData = teamsReferenceAdapter(apiData as TeamsReference)
 
   res.send(formattedApiData)
 

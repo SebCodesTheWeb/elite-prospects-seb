@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { TeamDataAdapter } from './lib/team.adapter'
 import { TeamData, DerivedTeamData } from '../../types/team.model'
@@ -9,13 +10,13 @@ async function handler(
 ): Promise<DerivedTeamData> {
   const teamId = req.query.teamId as string
 
-  const response = await fetch(
+  const response = await axios.get(
     `https://api.eliteprospects.com/v1/teams/${teamId}?apiKey=${process.env.API_KEY}`
   )
 
-  const apiData: TeamData = (await response.json()).data
+  const apiData = response.data
 
-  const formattedApiData = TeamDataAdapter(apiData)
+  const formattedApiData = TeamDataAdapter(apiData.data as TeamData)
 
   res.send(formattedApiData)
 

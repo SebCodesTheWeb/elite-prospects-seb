@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { cachingMiddlware } from './lib/caching-middleware'
 import { LeagueAdapter } from './lib/league.adapter'
 import { DerivedLeagueType, LeagueType } from '../../types/league.model'
+import axios from 'axios'
 
 async function handler(
   req: NextApiRequest,
@@ -9,11 +10,11 @@ async function handler(
 ): Promise<DerivedLeagueType> {
   const league = req.query.league as string
 
-  const response = await fetch(
+  const response = await axios.get(
     `https://api.eliteprospects.com/v1/leagues/${league}?apiKey=${process.env.API_KEY}`
   )
 
-  const apiData = await response.json()
+  const apiData = response.data
 
   const formattedApiData = LeagueAdapter(apiData.data as LeagueType)
 

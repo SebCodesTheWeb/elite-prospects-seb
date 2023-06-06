@@ -1,15 +1,11 @@
+import axios from 'axios'
 import { Team } from '../../../types/standings.model'
 import { useQuery } from '@tanstack/react-query'
 
 const fetchStandings = async (): Promise<Team[]> => {
-  const response = await fetch('/api/nhl')
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`)
-  }
+  const response = await axios('/api/nhl')
 
-  const data = await response.json()
-
-  return data
+  return response.data
 }
 export const useStandings = () => {
   const {
