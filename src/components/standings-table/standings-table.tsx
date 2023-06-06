@@ -35,8 +35,8 @@ export const StandingsTable = () => {
         borderColor='gray.200'
         borderRadius='4px'
         bgColor='white'
-        maxH='1000px'
         overflowY='auto'
+        maxH="1000px"
       >
         <Table variant='striped' colorScheme='linkedin' size='sm'>
           <Thead>

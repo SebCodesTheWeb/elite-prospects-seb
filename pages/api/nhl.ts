@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { Team, TeamStatsData } from '../../types/leagues.model'
+import { Team, TeamStatsData } from '../../types/standings.model'
 import { NHLAdapter } from './lib/nhl.adapter'
 import { cachingMiddlware } from './lib/caching-middleware'
 

@@ -6,9 +6,9 @@ import {
   SortingState,
   createColumnHelper,
 } from '@tanstack/react-table'
-import { Team as TeamModel } from '../../types/leagues.model'
+import { Team as TeamModel } from '../../../types/standings.model'
 import { useQuery } from '@tanstack/react-query'
-import { DerivedTeamData, PlaceholderTeamData } from '../../types/team.model'
+import { DerivedTeamData, PlaceholderTeamData } from '../../../types/team.model'
 
 type Team = TeamModel & {
   '+/-'?: number
