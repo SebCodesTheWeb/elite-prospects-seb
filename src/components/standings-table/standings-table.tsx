@@ -37,18 +37,23 @@ export const StandingsTable = () => {
         borderColor='gray.200'
         borderRadius='md'
         bgColor='white'
+        w='100%'
         overflowY='auto'
+        overflowX='auto'
         maxH='1000px'
       >
+        <Box
+          borderBottom='2px'
+          borderBottomColor='gray.200'
+          borderBottomStyle='solid'
+          w='100%'
+          p='4'
+        >
+          <Heading size='lg' color='gray.600'>
+            NHL standings 2022-2023
+          </Heading>
+        </Box>
         <Table variant='striped' colorScheme='linkedin' size='sm'>
-          <TableCaption
-            placement='top'
-            borderBottom='2px'
-            borderBottomColor='gray.200'
-            borderBottomStyle='solid'
-          >
-            <Heading size='lg'>NHL standings 2022-2023</Heading>
-          </TableCaption>
           <Thead>
             {table.getHeaderGroups().map((headerGroup) => (
               <Tr key={headerGroup.id}>
