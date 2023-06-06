@@ -31,7 +31,7 @@ export const StandingsTable = () => {
         maxH='1000px'
         overflowY='auto'
       >
-        <Table variant='striped' colorScheme='linkedin' size="sm">
+        <Table variant='striped' colorScheme='linkedin' size='sm'>
           <Thead>
             {table.getHeaderGroups().map((headerGroup) => (
               <Tr key={headerGroup.id}>
@@ -62,7 +62,7 @@ export const StandingsTable = () => {
               <>
                 <Tr
                   key={row.id}
-                  onClick={() => toggleRowExpanded(row.id)}
+                  onClick={() => toggleRowExpanded(row.original.id)}
                   cursor='pointer'
                   _hover={{ opacity: 0.5 }}
                 >
@@ -76,47 +76,53 @@ export const StandingsTable = () => {
                   ))}
                 </Tr>
                 <AnimatePresence initial={false}>
-                  {expandedRows.includes(row.id) && (
-                    <motion.tr
-                      key={row.id + '-expanded'}
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{
-                        opacity: { duration: 0.3 },
-                        height: { duration: 0.4 },
-                      }}
-                    >
-                      <Td colSpan={table.getAllColumns().length}>
-                        <Box display='flex' justifyContent='space-between'>
-                          <Image
-                            src={row.original.logo}
-                            alt={`${row.original.name} logo`}
-                            boxSize='50px'
-                          />
-                          <Box>
-                            <Text>
-                              <b>Founded:</b> {row.original.founded}
-                            </Text>
-                            <Text>
-                              <b>Arena:</b> {row.original.arena}
-                            </Text>
-                            <Text>
-                              <b>Country:</b> {row.original.country}
-                            </Text>
-                            <Text>
-                              <b>City:</b> {row.original.city}
-                            </Text>
+                  {expandedRows
+                    .filter((teamData) => teamData.id === row.original.id)
+                    .map((teamData) => (
+                      <motion.tr
+                        key={row.id + '-expanded'}
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{
+                          opacity: { duration: 0.3 },
+                          height: { duration: 0.4 },
+                        }}
+                      >
+                        <Td colSpan={table.getAllColumns().length}>
+                          <Box display='flex' justifyContent='space-between'>
+                            <Image
+                              src={teamData.logo}
+                              alt={`${teamData.name} logo`}
+                              boxSize='50px'
+                            />
+                            <Box>
+                              <Text>
+                                <b>Founded:</b> {teamData.founded}
+                              </Text>
+                              <Text>
+                                <b>Arena:</b> {teamData.arena.name} -{' '}
+                                {teamData.arena.yearOfConstruction}
+                              </Text>
+                              <Text>
+                                <b>Country:</b> {teamData.country }
+                              </Text>
+                              <Text>
+                                <b>City:</b> {teamData.city}
+                              </Text>
+                              <Text>
+                                <b>Cap Hit:</b> {teamData.capHit}
+                              </Text>
+                            </Box>
+                            <Box>
+                              <Text>
+                                <b>Colors:</b> {teamData.colors}
+                              </Text>
+                            </Box>
                           </Box>
-                          <Box>
-                            <Text>
-                              <b>Colors:</b> {row.original.colors}
-                            </Text>
-                          </Box>
-                        </Box>
-                      </Td>
-                    </motion.tr>
-                  )}
+                        </Td>
+                      </motion.tr>
+                    ))}
                 </AnimatePresence>
               </>
             ))}

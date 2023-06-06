@@ -6,8 +6,9 @@ import {
   SortingState,
   createColumnHelper,
 } from '@tanstack/react-table'
-import { Team as TeamModel } from '../../types/leagues-model'
+import { Team as TeamModel } from '../../types/leagues.model'
 import { useQuery } from '@tanstack/react-query'
+import { DerivedTeamData } from '../../types/team.model'
 
 type Team = TeamModel & {
   '+/-'?: number
@@ -82,6 +83,17 @@ const fetchStandings = async (): Promise<Team[]> => {
   return data
 }
 
+const fetchExtraTeamData = async (teamId: number): Promise<DerivedTeamData> => {
+  const response = await fetch(`/api/team/?teamId=${teamId}`)
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`)
+  }
+
+  const data = await response.json()
+
+  return data
+}
+
 export const useStandingsTable = () => {
   const [sorting, setSorting] = useState<SortingState>([
     {
@@ -89,7 +101,7 @@ export const useStandingsTable = () => {
       desc: false,
     },
   ])
-  const [expandedRows, setExpandedRows] = useState<string[]>([])
+  const [expandedRows, setExpandedRows] = useState<DerivedTeamData[]>([])
 
   const {
     isLoading,
@@ -115,14 +127,16 @@ export const useStandingsTable = () => {
     getSortedRowModel: getSortedRowModel(),
   })
 
-  const toggleRowExpanded = (rowId: string) => {
-    setExpandedRows((currentRows) => {
-      if (currentRows.includes(rowId)) {
-        return currentRows.filter((id) => id !== rowId)
-      } else {
-        return [...currentRows, rowId]
-      }
-    })
+  const toggleRowExpanded = async (teamId: number): Promise<void> => {
+    const teamExists = expandedRows.some((teamData) => teamData.id === teamId)
+    if (teamExists) {
+      setExpandedRows((prevExpandedRows) =>
+        prevExpandedRows.filter((teamData) => teamData.id !== teamId)
+      )
+    } else {
+      const newTeamData = await fetchExtraTeamData(teamId)
+      setExpandedRows((prevExpandedRows) => [...prevExpandedRows, newTeamData])
+    }
   }
 
   return {

@@ -1,13 +1,14 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { Team, TeamStatsData } from '../../types/leagues.model'
-import { NHLAdapter } from './lib/nhl.adapter'
+import { TeamDataAdapter } from './lib/team.adapter'
 import { client } from './lib/redis-client'
+import { TeamData, DerivedTeamData } from '../../types/team.model'
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Team[]>
+  res: NextApiResponse<DerivedTeamData>
 ) {
   const key = req.url || ''
+  const teamId = req.query.teamId as string
 
   try {
     await client.connect()
@@ -19,12 +20,12 @@ export default async function handler(
     }
   } catch (e) {
     const response = await fetch(
-      `https://api.eliteprospects.com/v1/leagues/nhl/standings?apiKey=${process.env.API_KEY}`
+      `https://api.eliteprospects.com/v1/teams/${teamId}?apiKey=${process.env.API_KEY}`
     )
 
-    const apiData = await response.json()
+    const apiData: TeamData = (await response.json()).data
 
-    const formattedApiData = NHLAdapter(apiData.data as TeamStatsData[])
+    const formattedApiData = TeamDataAdapter(apiData)
 
     try {
       await client.set(key, JSON.stringify(formattedApiData))

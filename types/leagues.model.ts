@@ -1,4 +1,5 @@
 export type Team = {
+  id: number
   name: string
   GP: number
   W: number
