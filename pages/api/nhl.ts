@@ -8,7 +8,7 @@ async function handler(
   res: NextApiResponse<Team[]>
 ): Promise<Team[]> {
   const response = await fetch(
-    `https://api.eliteprospects.com/v1/leagues/nhl/standings?apiKey=${process.env.API_KEY}`
+    `https://api.eliteprospects.com/v1/leagues/nhl/standings?fields=stats,postseason,team,group&apiKey=${process.env.API_KEY}`
   )
 
   const apiData = await response.json()
