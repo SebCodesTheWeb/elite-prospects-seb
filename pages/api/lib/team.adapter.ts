@@ -4,7 +4,7 @@ export const TeamDataAdapter = (teamData: TeamData): DerivedTeamData => ({
   isLoading: false,
   name: teamData.name,
   id: teamData.id,
-  logo: teamData.logo.medium,
+  logo: teamData.logo.large || teamData.logo.medium,
   teamType: teamData.teamType,
   founded: teamData.founded,
   city: teamData.city,
