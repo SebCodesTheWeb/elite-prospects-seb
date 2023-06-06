@@ -3,7 +3,7 @@ import { Team } from '../../../types/standings.model'
 import { useQuery } from '@tanstack/react-query'
 
 const fetchStandings = async (): Promise<Team[]> => {
-  const response = await axios('/api/nhl')
+  const response = await axios('/api/nhl-standings')
 
   return response.data
 }

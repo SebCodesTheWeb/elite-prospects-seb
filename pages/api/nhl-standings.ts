@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { Team, TeamStatsData } from '../../types/standings.model'
-import { NHLAdapter } from './lib/nhl.adapter'
+import { NHLStandingsAdapter } from './lib/nhl-standings.adapter'
 import { cachingMiddlware } from './lib/caching-middleware'
 import axios from 'axios'
 
@@ -14,7 +14,7 @@ async function handler(
 
   const apiData = response.data
 
-  const formattedApiData = NHLAdapter(apiData.data as TeamStatsData[])
+  const formattedApiData = NHLStandingsAdapter(apiData.data as TeamStatsData[])
 
   res.send(formattedApiData)
 

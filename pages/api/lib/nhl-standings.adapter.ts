@@ -1,6 +1,6 @@
 import { TeamStatsData, Team } from '../../../types/standings.model'
 
-export const NHLAdapter = (standingsData: TeamStatsData[]): Team[] => {
+export const NHLStandingsAdapter = (standingsData: TeamStatsData[]): Team[] => {
   return standingsData.map((teamData) => ({
     id: teamData.team.id,
     name: teamData.team.name,
