@@ -1,4 +1,5 @@
 'use client'
+import React from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { flexRender } from '@tanstack/react-table'
 import {
@@ -82,9 +83,8 @@ export const StandingsTable = () => {
           </Thead>
           <Tbody>
             {table.getRowModel().rows.map((row) => (
-              <>
+              <React.Fragment key={row.id}>
                 <Tr
-                  key={row.id}
                   onClick={() => toggleRowExpanded(row.original.id)}
                   cursor='pointer'
                   _hover={{ opacity: 0.5 }}
@@ -203,7 +203,7 @@ export const StandingsTable = () => {
                       </motion.tr>
                     ))}
                 </AnimatePresence>
-              </>
+              </React.Fragment>
             ))}
           </Tbody>
         </Table>
