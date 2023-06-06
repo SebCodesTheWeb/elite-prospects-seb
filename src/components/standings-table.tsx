@@ -90,36 +90,45 @@ export const StandingsTable = () => {
                         }}
                       >
                         <Td colSpan={table.getAllColumns().length}>
-                          <Box display='flex' justifyContent='space-between'>
-                            <Image
-                              src={teamData.logo}
-                              alt={`${teamData.name} logo`}
-                              boxSize='50px'
-                            />
-                            <Box>
-                              <Text>
-                                <b>Founded:</b> {teamData.founded}
-                              </Text>
-                              <Text>
-                                <b>Arena:</b> {teamData.arena.name} -{' '}
-                                {teamData.arena.yearOfConstruction}
-                              </Text>
-                              <Text>
-                                <b>Country:</b> {teamData.country }
-                              </Text>
-                              <Text>
-                                <b>City:</b> {teamData.city}
-                              </Text>
-                              <Text>
-                                <b>Cap Hit:</b> {teamData.capHit}
-                              </Text>
+                          {teamData.isLoading && (
+                            <Skeleton isLoaded={!teamData.isLoading} h='80px' />
+                          )}
+                          {!teamData.isLoading && (
+                            <Box
+                              display='flex'
+                              justifyContent='space-between'
+                              h='80px'
+                            >
+                              <Image
+                                src={teamData.logo}
+                                alt={`${teamData.name} logo`}
+                                boxSize='50px'
+                              />
+                              <Box>
+                                <Text>
+                                  <b>Founded:</b> {teamData.founded}
+                                </Text>
+                                <Text>
+                                  <b>Arena:</b> {teamData.arena.name} -{' '}
+                                  {teamData.arena.yearOfConstruction}
+                                </Text>
+                                <Text>
+                                  <b>Country:</b> {teamData.country}
+                                </Text>
+                                <Text>
+                                  <b>City:</b> {teamData.city}
+                                </Text>
+                                <Text>
+                                  <b>Cap Hit:</b> {teamData.capHit}
+                                </Text>
+                              </Box>
+                              <Box>
+                                <Text>
+                                  <b>Colors:</b> {teamData.colors}
+                                </Text>
+                              </Box>
                             </Box>
-                            <Box>
-                              <Text>
-                                <b>Colors:</b> {teamData.colors}
-                              </Text>
-                            </Box>
-                          </Box>
+                          )}
                         </Td>
                       </motion.tr>
                     ))}

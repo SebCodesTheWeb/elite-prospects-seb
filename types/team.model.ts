@@ -92,6 +92,7 @@ export type TeamData = {
 }
 
 export type DerivedTeamData = {
+  isLoading: false
   name: string
   id: number
   logo: string
@@ -112,4 +113,9 @@ export type DerivedTeamData = {
     eliteprospectsUrl: string
     officialWebUrl: string
   }
+}
+
+export type PlaceholderTeamData = {
+  id: number
+  isLoading: true
 }

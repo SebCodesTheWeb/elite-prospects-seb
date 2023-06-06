@@ -1,6 +1,7 @@
 import { TeamData, DerivedTeamData } from '../../../types/team.model'
 
 export const TeamDataAdapter = (teamData: TeamData): DerivedTeamData => ({
+  isLoading: false,
   name: teamData.name,
   id: teamData.id,
   logo: teamData.logo.medium,

@@ -12,6 +12,10 @@ client.on('connect', function () {
   console.log('Redis client connected')
 })
 
+client.on('end', function () {
+  console.log('Redis client disconnected')
+})
+
 client.on('error', function (err) {
   console.log('Something went wrong with Redis ' + err)
 })
