@@ -28,14 +28,14 @@ export const LeagueInfo = () => {
     <Stack spacing='4'>
       {data && <Image w='500px' src={data.image} alt='League logo' />}
       {extraTeamData && (
-        <Wrap w='500px' spacing='8'>
+        <Wrap w='500px' spacing='4' justify="center">
           {Object.keys(groupedTeams).map((division) => (
             <Box key={division}>
               <Heading size='sm'>{division}</Heading>
-              <Stack>
+              <Stack spacing="0" w="230px">
                 {groupedTeams[division].map((team) => (
                   <HStack key={team.name}>
-                    <Image boxSize='10px' src={team.logo} alt={team.name} />
+                    <Image boxSize='12px' src={team.logo} alt={team.name} />
                     <Link href={team.link} isExternal>
                       {team.name}
                     </Link>
