@@ -5,13 +5,20 @@ import {
   Table,
   Tbody,
   Thead,
+  Stack,
   Tr,
   Th,
   Td,
+  Wrap,
+  Link,
   TableContainer,
+  Grid,
+  GridItem,
+  Flex,
   Box,
   Image,
   Text,
+  Heading,
   Skeleton,
 } from '@chakra-ui/react'
 import { useStandingsTable } from './use-standings-table'
@@ -95,38 +102,80 @@ export const StandingsTable = () => {
                           )}
                           {!teamData.isLoading && (
                             <Box
-                              display='flex'
-                              justifyContent='space-between'
-                              h='80px'
+                              padding='5'
+                              boxShadow='md'
+                              borderWidth='1px'
+                              borderRadius='lg'
                             >
-                              <Image
-                                src={teamData.logo}
-                                alt={`${teamData.name} logo`}
-                                boxSize='50px'
-                              />
-                              <Box>
-                                <Text>
-                                  <b>Founded:</b> {teamData.founded}
-                                </Text>
-                                <Text>
-                                  <b>Arena:</b> {teamData.arena.name} -{' '}
-                                  {teamData.arena.yearOfConstruction}
-                                </Text>
-                                <Text>
-                                  <b>Country:</b> {teamData.country}
-                                </Text>
-                                <Text>
-                                  <b>City:</b> {teamData.city}
-                                </Text>
-                                <Text>
-                                  <b>Cap Hit:</b> {teamData.capHit}
-                                </Text>
-                              </Box>
-                              <Box>
-                                <Text>
-                                  <b>Colors:</b> {teamData.colors}
-                                </Text>
-                              </Box>
+                              <Grid templateColumns='repeat(5, 1fr)' gap={6}>
+                                <GridItem colSpan={1}>
+                                  <Image
+                                    src={teamData.logo}
+                                    alt={`${teamData.name} logo`}
+                                    boxSize='100px'
+                                  />
+                                </GridItem>
+                                <GridItem colSpan={2}>
+                                  <Flex
+                                    direction='column'
+                                    justifyContent='space-between'
+                                    height='100%'
+                                  >
+                                    <Text fontSize='xl' fontWeight='bold'>
+                                      {teamData.name}
+                                    </Text>
+                                    <Text>
+                                      <b>Founded:</b> {teamData.founded}
+                                    </Text>
+                                    <Text>
+                                      <b>Country:</b> {teamData.country}
+                                    </Text>
+                                    <Text>
+                                      <b>City:</b> {teamData.city}
+                                    </Text>
+                                    <Text>
+                                      <b>Cap Hit:</b> {teamData.capHit}
+                                    </Text>
+                                    <Text>
+                                      <b>Views:</b> {teamData.views}
+                                    </Text>
+                                  </Flex>
+                                </GridItem>
+
+                                <GridItem colSpan={2}>
+                                  <Flex
+                                    direction='column'
+                                    justifyContent='space-between'
+                                    height='100%'
+                                  >
+                                    <Text>
+                                      <b>Colors:</b> {teamData.colors}
+                                    </Text>
+                                    <Text>
+                                      <b>Arena:</b> {teamData.arena.name} <br />
+                                      <b>Location:</b> {teamData.arena.location}{' '}
+                                      <br />
+                                      <b>Year of Construction:</b>{' '}
+                                      {teamData.arena.yearOfConstruction} <br />
+                                      <b>Capacity:</b> {teamData.arena.capacity}
+                                    </Text>
+                                    <Box>
+                                      <Link
+                                        isExternal={true}
+                                        href={teamData.links.officialWebUrl}
+                                      >
+                                        Official web page
+                                      </Link>
+                                      <Link
+                                        isExternal={true}
+                                        href={teamData.links.eliteprospectsUrl}
+                                      >
+                                        Elite Prospects
+                                      </Link>
+                                    </Box>
+                                  </Flex>
+                                </GridItem>
+                              </Grid>
                             </Box>
                           )}
                         </Td>
