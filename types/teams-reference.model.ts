@@ -1,23 +1,13 @@
-type Links = {
-    eliteprospectsUrl: string
-    officialWebUrl: string
-    statsUrl: string
-    newsUrls: string[]
-    forumUrl: string
-    facebook: string
-    twitter: string
-    instagram: string
-    youtube: string
-  }
+import { Links } from './shared-types'
 
 export type TeamsReference = {
-    logoUrl: string
-    links: Links
-    id: number
+  logoUrl: string
+  links: Links
+  id: number
 }[]
 
 export type DerivedTeamsReference = {
-    id: number
-    logo: string
-    link: string
+  id: number
+  logo: string
+  link: string
 }[]

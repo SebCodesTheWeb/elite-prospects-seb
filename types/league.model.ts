@@ -1,28 +1,4 @@
-type FlagURLs = {
-  small: string
-  medium: string
-}
-
-type Links = {
-  eliteprospectsUrl: string
-  officialWebUrl: string
-  statsUrl: string
-  newsUrls: string[]
-  forumUrl: string
-  facebook: string
-  twitter: string
-  instagram: string
-  youtube: string
-}
-
-type Country = {
-  slug: string
-  name: string
-  iso_3166_1_alpha_2: string
-  flagUrl: FlagURLs
-  updatedAt: string
-  _links: string[]
-}
+import { Country, FlagUrl, Links } from './shared-types'
 
 export type LeagueType = {
   id: number
@@ -34,7 +10,7 @@ export type LeagueType = {
   leagueLevel: string
   country: Country
   region: string
-  flagUrl: FlagURLs
+  flagUrl: FlagUrl
   logoUrl: string
   imageUrl: string
   existsInLeagueEndpoint: boolean
