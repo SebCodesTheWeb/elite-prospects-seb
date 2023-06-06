@@ -7,15 +7,12 @@ const fetchStandings = async (): Promise<Team[]> => {
 
   return response.data
 }
+
 export const useStandings = () => {
-  const {
-    isLoading,
-    error,
-    data = [],
-  } = useQuery({
+  const { isLoading, data = [] } = useQuery({
     queryKey: ['standings'],
     queryFn: fetchStandings,
   })
 
-  return { isLoading, error, data }
+  return { isLoading, data }
 }

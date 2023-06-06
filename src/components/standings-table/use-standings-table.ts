@@ -85,11 +85,7 @@ export const useStandingsTable = () => {
     (DerivedTeamData | PlaceholderTeamData)[]
   >([])
 
-  const { isLoading, error, data } = useStandings()
-
-  if (error) {
-    throw new Error(`Err: ${error}`)
-  }
+  const { isLoading, data } = useStandings()
 
   const table = useReactTable({
     data,

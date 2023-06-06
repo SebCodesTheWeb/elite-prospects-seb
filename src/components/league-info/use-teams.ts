@@ -17,7 +17,7 @@ export const useTeams = () => {
     queryFn: fetchTeamsReference,
   })
 
-  if (!data) return
+  if (!data) return []
 
   const dataById = new Map(data.map((item) => [item.id, item]))
 
