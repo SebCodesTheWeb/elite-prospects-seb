@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { flexRender } from '@tanstack/react-table'
 import {
   Table,
+  SkeletonText,
   Tbody,
   Thead,
   Stack,
@@ -19,7 +20,6 @@ import {
   Text,
   HStack,
   Skeleton,
-  TableCaption,
   Heading,
 } from '@chakra-ui/react'
 import { useStandingsTable } from './use-standings-table'
@@ -113,22 +113,30 @@ export const StandingsTable = () => {
                       >
                         <Td colSpan={table.getAllColumns().length}>
                           {teamData.isLoading && (
-                            <Skeleton isLoaded={!teamData.isLoading} h='80px' />
+                            <Box p='4' boxShadow='md' bg='white' h='150px'>
+                              <SkeletonText
+                                mt='4'
+                                noOfLines={4}
+                                spacing='4'
+                                skeletonHeight='2'
+                              />
+                            </Box>
                           )}
                           {!teamData.isLoading && (
                             <Box
-                              padding='5'
+                              padding='4'
                               boxShadow='md'
                               borderWidth='1px'
                               borderRadius='lg'
                               bgColor='white'
+                              h='150px'
                             >
                               <Grid templateColumns='repeat(5, 1fr)' gap={6}>
                                 <GridItem colSpan={1}>
                                   <Image
                                     src={teamData.logo}
                                     alt={`${teamData.name} logo`}
-                                    w='100px'
+                                    h='100px'
                                   />
                                 </GridItem>
                                 <GridItem colSpan={2}>
