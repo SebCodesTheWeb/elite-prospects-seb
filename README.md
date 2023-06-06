@@ -5,6 +5,7 @@ Demo: https://elite-prospects-seb-sebcodestheweb.vercel.app/
 Display of NHL conferences/divisions and standings of 2022-2023. The project is implemented using Next.js, Chakra UI, Redis for middle layer caching, Eliteprospects API, Tanstack Query, Tanstack Table, Typescript and Jest.
 
 View video:
+[![Demo video](https://img.youtube.com/vi/_4-4HsSBfqE/0.jpg)](https://www.youtube.com/watch?v=_4-4HsSBfqE)
 
 ## Usage
 
