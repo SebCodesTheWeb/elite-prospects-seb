@@ -19,7 +19,9 @@ export const Header = () => {
       <Heading size='sm'>
         <Flex gap='1px'>
           <Icon as={AtSignIcon} />
-          <Link isExternal={true} href="https://github.com/SebCodesTheWeb">SebCodesTheWeb</Link>
+          <Link isExternal={true} href='https://github.com/SebCodesTheWeb'>
+            SebCodesTheWeb
+          </Link>
         </Flex>
       </Heading>
     </HStack>
