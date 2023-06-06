@@ -42,18 +42,19 @@ export const StandingsTable = () => {
         overflowX='auto'
         maxH='1000px'
       >
-        <Box
-          borderBottom='2px'
-          borderBottomColor='gray.200'
-          borderBottomStyle='solid'
-          w='100%'
-          p='4'
-        >
+        <Box w='100%' p='4'>
           <Heading size='lg' color='gray.600'>
             NHL standings 2022-2023
           </Heading>
         </Box>
-        <Table variant='striped' colorScheme='linkedin' size='sm'>
+        <Table
+          variant='striped'
+          colorScheme='linkedin'
+          size='sm'
+          borderTop='2px'
+          borderTopColor='gray.200'
+          borderTopStyle='solid'
+        >
           <Thead>
             {table.getHeaderGroups().map((headerGroup) => (
               <Tr key={headerGroup.id}>
