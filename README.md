@@ -6,6 +6,9 @@ Display of NHL conferences/divisions and standings of 2022-2023. The project is 
 
 [![Demo video](https://img.youtube.com/vi/_4-4HsSBfqE/0.jpg)](https://www.youtube.com/watch?v=_4-4HsSBfqE)
 
+View demo video: https://www.youtube.com/watch?v=_4-4HsSBfqE&ab_channel=SebCodesTheWeb
+
+
 ## Usage
 
 Clone this repo, install packages and run:
