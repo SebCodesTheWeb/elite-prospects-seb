@@ -6,15 +6,10 @@ import {
   SortingState,
   createColumnHelper,
 } from '@tanstack/react-table'
-import { Team as TeamModel } from '../../../types/standings.model'
-import { useQuery } from '@tanstack/react-query'
+import { Team } from '../../../types/standings.model'
 import { DerivedTeamData, PlaceholderTeamData } from '../../../types/team.model'
+import { useStandings } from '../utils/use-standings'
 
-type Team = TeamModel & {
-  '+/-'?: number
-  TP?: number
-  PGP?: number
-}
 const columnHelper = createColumnHelper<Team>()
 
 const columns = [
@@ -72,17 +67,6 @@ const columns = [
   }),
 ]
 
-const fetchStandings = async (): Promise<Team[]> => {
-  const response = await fetch('/api/nhl')
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`)
-  }
-
-  const data = await response.json()
-
-  return data
-}
-
 const fetchExtraTeamData = async (teamId: number): Promise<DerivedTeamData> => {
   const response = await fetch(`/api/team?teamId=${teamId}`)
   if (!response.ok) {
@@ -92,7 +76,7 @@ const fetchExtraTeamData = async (teamId: number): Promise<DerivedTeamData> => {
   const data = await response.json()
 
   return data
-} 
+}
 
 export const useStandingsTable = () => {
   const [sorting, setSorting] = useState<SortingState>([
@@ -105,14 +89,7 @@ export const useStandingsTable = () => {
     (DerivedTeamData | PlaceholderTeamData)[]
   >([])
 
-  const {
-    isLoading,
-    error,
-    data = [],
-  } = useQuery({
-    queryKey: ['standings'],
-    queryFn: fetchStandings,
-  })
+  const { isLoading, error, data } = useStandings()
 
   if (error) {
     throw new Error(`Err: ${error}`)

@@ -19,6 +19,8 @@ import {
   Text,
   HStack,
   Skeleton,
+  TableCaption,
+  Heading,
 } from '@chakra-ui/react'
 import { useStandingsTable } from './use-standings-table'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
@@ -33,12 +35,20 @@ export const StandingsTable = () => {
         borderWidth='2px'
         borderStyle='solid'
         borderColor='gray.200'
-        borderRadius='4px'
+        borderRadius='md'
         bgColor='white'
         overflowY='auto'
-        maxH="1000px"
+        maxH='1000px'
       >
         <Table variant='striped' colorScheme='linkedin' size='sm'>
+          <TableCaption
+            placement='top'
+            borderBottom='2px'
+            borderBottomColor='gray.200'
+            borderBottomStyle='solid'
+          >
+            <Heading size='lg'>NHL standings 2022-2023</Heading>
+          </TableCaption>
           <Thead>
             {table.getHeaderGroups().map((headerGroup) => (
               <Tr key={headerGroup.id}>
